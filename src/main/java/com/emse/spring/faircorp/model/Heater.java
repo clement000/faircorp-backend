@@ -20,7 +20,7 @@ public class Heater {
     private Room room;
 
     @Column(nullable = false)
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private HeaterStatus heaterStatus;
 
     public Heater() {

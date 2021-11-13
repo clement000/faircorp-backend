@@ -14,7 +14,7 @@ public class Window {
     private String name;
 
     @Column(nullable = false)
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private WindowStatus windowStatus;
 
     @ManyToOne
