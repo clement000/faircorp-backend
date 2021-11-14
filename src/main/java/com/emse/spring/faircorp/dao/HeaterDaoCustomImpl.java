@@ -1,6 +1,10 @@
 package com.emse.spring.faircorp.dao;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+import com.emse.spring.faircorp.model.Heater;
 
 public class HeaterDaoCustomImpl implements HeaterDaoCustom {
 
@@ -13,5 +17,13 @@ public class HeaterDaoCustomImpl implements HeaterDaoCustom {
         em.createQuery(jpql)
                 .setParameter("id", id)
                 .executeUpdate();
+    }
+
+    @Override
+    public List<Heater> findByBuilding(Long id) {
+        String jpql = "select h from Heater h where h.room.building.id = :id";
+        return em.createQuery(jpql, Heater.class)
+            .setParameter("id", id)
+            .getResultList();
     }
 }

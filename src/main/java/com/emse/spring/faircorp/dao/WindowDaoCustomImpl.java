@@ -25,4 +25,12 @@ public class WindowDaoCustomImpl implements WindowDaoCustom {
                 .setParameter("id", id)
                 .executeUpdate();
     }
+
+    @Override
+    public List<Window> findByBuilding(Long id) {
+        String jpql = "select w from Window w where w.room.building.id = :id";
+        return em.createQuery(jpql, Window.class)
+                .setParameter("id", id)
+                .getResultList();
+    }
 }

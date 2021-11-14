@@ -1,6 +1,9 @@
 package com.emse.spring.faircorp.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.*;
 
 @Entity
@@ -24,10 +27,16 @@ public class Room {
     private Double targetTemperature;
 
     @OneToMany(mappedBy = "room")
+    @JsonManagedReference
     private Set<Heater> heaters;
 
     @OneToMany(mappedBy = "room")
+    @JsonManagedReference
     private Set<Window> windows;
+
+    @ManyToOne
+    @JsonBackReference
+    private Building building;
 
     public Room() {
     }
@@ -92,4 +101,13 @@ public class Room {
     public void setWindows(Set<Window> windows) {
         this.windows = windows;
     }
+    
+    public Building getBuilding() {
+        return this.building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
 }

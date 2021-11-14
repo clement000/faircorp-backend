@@ -53,6 +53,11 @@ class WindowDaoTest {
         windowDao.deleteByRoom(-10L);
         List<Window> result = windowDao.findAllById(roomIds);
         Assertions.assertThat(result).isEmpty();
+    }
 
+    @Test
+    public void shouldSelectWindowsBuilding() {
+        List<Window> windows = windowDao.findByBuilding(-10L);
+        Assertions.assertThat(windows.size()).isEqualTo(4);
     }
 }

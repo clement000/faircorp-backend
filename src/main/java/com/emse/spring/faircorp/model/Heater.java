@@ -2,6 +2,8 @@ package com.emse.spring.faircorp.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table
 public class Heater {
@@ -17,6 +19,7 @@ public class Heater {
     private String name;
 
     @ManyToOne
+    @JsonBackReference
     private Room room;
 
     @Column(nullable = false)
