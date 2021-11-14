@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import com.emse.spring.faircorp.dao.*;
+import com.emse.spring.faircorp.model.*;
 
 import org.springframework.transaction.annotation.*;
 import org.springframework.web.bind.annotation.*;
@@ -28,5 +29,18 @@ public class BuildingController {
     @GetMapping
     public List<BuildingDto> findAll(){
         return buildingDao.findAll().stream().map(BuildingDto::new).collect(Collectors.toList());
+    }
+
+    @PostMapping
+    public BuildingDto create(@RequestBody BuildingDto dto) {
+        Building building = null;
+        // On creation id is not defined
+        if (dto.getId() == null) {
+            building = buildingDao.save(new Building(dto.getName(), dto.getRooms()));
+        }
+        else {
+            building = buildingDao.getById(dto.getId());
+        }
+        return new BuildingDto(building);
     }
 }
