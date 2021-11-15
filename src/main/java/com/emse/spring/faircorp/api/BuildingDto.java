@@ -1,14 +1,17 @@
 package com.emse.spring.faircorp.api;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+import com.emse.spring.faircorp.dao.RoomDao;
 import com.emse.spring.faircorp.model.*;
 
 public class BuildingDto {
 
     private Long id;
     private String name;
-    private Set<Room> rooms;
+    private Set<String> roomsNames;
+    private Set<Long> roomsIds;
 
     public BuildingDto(){
     }
@@ -16,9 +19,9 @@ public class BuildingDto {
     public BuildingDto(Building building){
         this.id = building.getId();
         this.name = building.getName();
-        this.rooms = building.getRooms();
+        this.roomsNames = building.getRooms().stream().map(room -> room.getName()).collect(Collectors.toSet());
+        this.roomsIds = building.getRooms().stream().map(room -> room.getId()).collect(Collectors.toSet());
     }
-
     public Long getId() {
         return this.id;
     }
@@ -35,11 +38,20 @@ public class BuildingDto {
         this.name = name;
     }
 
-    public Set<Room> getRooms() {
-        return this.rooms;
+    public Set<String> getRoomsNames() {
+        return this.roomsNames;
     }
 
-    public void setRooms(Set<Room> rooms) {
-        this.rooms = rooms;
+    public void setRoomsNames(Set<String> roomsNames) {
+        this.roomsNames = roomsNames;
     }
+
+    public Set<Long> getRoomsIds() {
+        return this.roomsIds;
+    }
+
+    public void setRoomsIds(Set<Long> roomsIds) {
+        this.roomsIds = roomsIds;
+    }
+
 }

@@ -3,8 +3,6 @@ package com.emse.spring.faircorp.model;
 import java.util.*;
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 @Entity
 @Table
 public class Building {
@@ -16,7 +14,6 @@ public class Building {
     private String name;
 
     @OneToMany(mappedBy = "building")
-    @JsonManagedReference
     private Set<Room> rooms;
 
     public Building(){
