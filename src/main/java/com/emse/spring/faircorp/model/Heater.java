@@ -26,10 +26,11 @@ public class Heater {
     public Heater() {
     }
 
-    public Heater(String name, Room room, HeaterStatus heaterStatus) {
+    public Heater(String name, Room room, HeaterStatus heaterStatus, Long power) {
         this.name = name;
         this.room = room;
         this.heaterStatus = heaterStatus;
+        this.power = power;
     }
 
     public Long getId() {

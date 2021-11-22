@@ -36,9 +36,14 @@ public class Room {
     public Room() {
     }
 
-    public Room(int floor, String name) {
+    public Room(int floor, String name, Double currentTemperature, Double targetTemperature, Building building) {
         this.floor = floor;
         this.name = name;
+        this.currentTemperature = currentTemperature;
+        this.targetTemperature = targetTemperature;
+        this.heaters = heaters;
+        this.windows = windows;
+        this.building = building;
     }
 
 	public Long getId() {

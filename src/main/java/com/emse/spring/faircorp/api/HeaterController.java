@@ -39,7 +39,7 @@ public class HeaterController {
         Heater heater = null;
         // On creation id is not defined
         if (dto.getId() == null) {
-            heater = heaterDao.save(new Heater(dto.getName(), room, dto.getHeaterStatus()));
+            heater = heaterDao.save(new Heater(dto.getName(), room, dto.getHeaterStatus(), dto.getPower()));
         }
         else {
             heater = heaterDao.getById(dto.getId());
