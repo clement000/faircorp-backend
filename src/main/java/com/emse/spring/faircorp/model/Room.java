@@ -41,8 +41,6 @@ public class Room {
         this.name = name;
         this.currentTemperature = currentTemperature;
         this.targetTemperature = targetTemperature;
-        this.heaters = heaters;
-        this.windows = windows;
         this.building = building;
     }
 

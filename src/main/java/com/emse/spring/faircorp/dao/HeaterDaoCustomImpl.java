@@ -26,4 +26,12 @@ public class HeaterDaoCustomImpl implements HeaterDaoCustom {
             .setParameter("id", id)
             .getResultList();
     }
+
+    @Override
+    public List<Heater> findByRoom(Long id) {
+        String jpql = "select h from Heater h where h.room.id = :id";
+        return em.createQuery(jpql, Heater.class)
+            .setParameter("id", id)
+            .getResultList();
+    }
 }
