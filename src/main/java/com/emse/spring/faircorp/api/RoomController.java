@@ -31,7 +31,7 @@ public RoomController(RoomDao roomDao, BuildingDao buildingDao, WindowDao window
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList()); 
     }
 
-@GetMapping(path = "/{id}")
+    @GetMapping(path = "/{id}")
     public RoomDto findById(@PathVariable Long id) {
         return roomDao.findById(id).map(RoomDto::new).orElse(null);
     }
