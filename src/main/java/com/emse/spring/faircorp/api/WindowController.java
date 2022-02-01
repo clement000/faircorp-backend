@@ -16,18 +16,22 @@ public class WindowController {
 
     private final WindowDao windowDao;
     private final RoomDao roomDao;
+    private final BuildingDao buildingDao;
 
-    public WindowController(WindowDao windowDao, RoomDao roomDao) {
+    public WindowController(WindowDao windowDao, RoomDao roomDao, BuildingDao buildingDao) {
         this.windowDao = windowDao;
         this.roomDao = roomDao;
+        this.buildingDao = buildingDao;
     }
 
     @GetMapping
+    @CrossOrigin
     public List<WindowDto> findAll() {
         return windowDao.findAll().stream().map(WindowDto::new).collect(Collectors.toList()); 
     }
 
     @GetMapping(path = "/{id}")
+    @CrossOrigin
     public WindowDto findById(@PathVariable Long id) {
         return windowDao.findById(id).map(WindowDto::new).orElse(null);
     }
@@ -42,7 +46,8 @@ public class WindowController {
     @PostMapping
     public WindowDto create(@RequestBody WindowDto dto) {
         // WindowDto must always contain the window room
-        Room room = roomDao.getById(dto.getRoomId());
+        RoomDto roomDto = dto.getRoom();
+        Room room = new Room(roomDto.getFloor(), roomDto.getName(), roomDto.getCurrentTemperature(), roomDto.getTargetTemperature(), buildingDao.getById(roomDto.getBuildingId()));
         Window window = null;
         // On creation id is not defined
         if (dto.getId() == null) {

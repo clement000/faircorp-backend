@@ -27,11 +27,13 @@ public RoomController(RoomDao roomDao, BuildingDao buildingDao, WindowDao window
 }
 
     @GetMapping
+    @CrossOrigin
     public List<RoomDto> findAll() {
         return roomDao.findAll().stream().map(RoomDto::new).collect(Collectors.toList()); 
     }
 
     @GetMapping(path = "/{id}")
+    @CrossOrigin
     public RoomDto findById(@PathVariable Long id) {
         return roomDao.findById(id).map(RoomDto::new).orElse(null);
     }
